@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Aryash</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<h1 class="title">Happy Birthday Aryash 🎉</h1>
+
+<div class="animation">
+❤️ 🎈 🎂 😊 🎁 💖
+</div>
+
+<div class="photo-box">
+    <img src="./images/firstpic.jpeg">
+</div>
+
+<p class="animated-text">This handsome turns 19 💫</p>
+
+<!-- Typing Effect -->
+<div class="message">
+<p id="typing"></p>
+</div>
+
+<div class="animation">💛 💫 💖 🌙</div>
+
+<h3 class="question">Do you want to go back sweet memories once, cutu? 🤭</h3>
+
+<button class="btn" onclick="go()">🎀Yes🎀</button>
+<button class="btn" onclick="go()">🎀I'm excited🎀</button>
+
+<script>
+// Typing Text
+const text = `I don’t know whether this will make you happy or not, but I always try to make you happy 🙃. I also don’t know whether you will accept this or not. I’m not even asking you to consider me for what has happened. Right now, all I want is to say thank you to you—and even that feels too small🎀🥹.
+
+I’m confused whether this bond is permanent or temporary, but however long it lasts, the memories will be permanent for me💗🩷. I want to thank you from my heart for understanding all my emotions😌😌, and for listening to everything I said.
+
+For the first time, I felt this happy liking someone🦋🦋, but now whatever happens is destiny. I don’t know how you’ll react, but still… your cutie is requesting you—please don’t hurt her too much 🥺🥺. When you say something, she can’t stay stable.
+
+I will always remember our laughter, our fun, our talks…😁😁 waiting to go home with you… meeting you every day in college… 🤭🩷and especially all those cute conversations with you. The sweet compliments you gave me—I will never forget them 😌😌. When I don’t get to talk to you, even for a day, it hurts me. I don’t know how I’ll accept it if I don’t have you, but whatever happens, I have no control over it, so I’ll move forward thinking it’s fate.
+
+And it’s not just for today—I don’t wish you only today 🙃. Every day carries my love for you ❤️🎀.
+
+Love you, my cutu… 💗🎀🦋`;
+
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 25);
+    }
+}
+typing();
+
+// Button redirect
+function go(){
+    window.location.href = "memories.html";
+}
+
+// Fireworks
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function createFirework(x, y) {
+    for (let i = 0; i < 50; i++) {
+        particles.push({
+            x: x,
+            y: y,
+            dx: (Math.random() - 0.5) * 5,
+            dy: (Math.random() - 0.5) * 5,
+            life: 100
+        });
+    }
+}
+
+function animateFireworks() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, index) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.life--;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "pink";
+        ctx.fill();
+
+        if (p.life <= 0) particles.splice(index, 1);
+    });
+
+    requestAnimationFrame(animateFireworks);
+}
+
+setInterval(() => {
+    createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+}, 800);
+
+animateFireworks();
+</script>
+
+</body>
+</html>
